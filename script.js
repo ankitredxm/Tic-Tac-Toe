@@ -5,7 +5,7 @@ let msgConatiner=document.querySelector(".msg-container");
 let msg=document.querySelector("#msg");
 
 let turno=true;
-
+let count=0;
 
 const winpatterns=[
     [0,1,2],
@@ -22,6 +22,7 @@ const resetGame=()=>{
     turno=true;
     enableBoxes();
     msgConatiner.classList.add("hide");
+    count=0;
 
 
 }
@@ -33,7 +34,10 @@ const enableBoxes=()=>{
     }
 }
 
-
+const DrawGame=()=>{
+    alert("Game Draw");
+    resetGame();
+}
 
 
 const disabledBoxes=()=>{
@@ -45,7 +49,7 @@ const disabledBoxes=()=>{
 
 const showWinner=(winner)=>{
     disabledBoxes();
-    msg.innerText=`Congratulations,Winner is ${winner}`;
+    msg.innerText=`Congatulations,Winner is ${winner}`;
     msgConatiner.classList.remove("hide");
 }
 
@@ -80,9 +84,17 @@ boxes.forEach((box)=>{
         }
         box.disabled=true;
         checkwinner();
+        ++count;
+        if(count==9){
+
+            DrawGame();
+        }
+       
     })
     
 });
 
 newGameBtn.addEventListener("click",resetGame);
 reset.addEventListener("click",resetGame);
+
+
